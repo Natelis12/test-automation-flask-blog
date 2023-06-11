@@ -1,33 +1,22 @@
 import os
-import ssl
-import smtplib
 import secrets
+import smtplib
 import sqlite3
-from os import mkdir
-from random import randint
-from os.path import exists
+import ssl
 from datetime import datetime
 from email.message import EmailMessage
-from passlib.hash import sha256_crypt
-from flask import render_template, Blueprint
-from forms import (
-    loginForm,
-    signUpForm,
-    commentForm,
-    createPostForm,
-    passwordResetForm,
-    changePasswordForm,
-    changeUserNameForm,
-)
+from os import mkdir
+from os.path import exists
+from random import randint
+
 from flask import (
-    Flask,
-    flash,
-    request,
-    session,
-    redirect,
-    Blueprint,
-    render_template,
-    send_from_directory,
+    Blueprint, Flask, flash, redirect, render_template, request, send_from_directory, session
+)
+from passlib.hash import sha256_crypt
+
+from forms import (
+    changePasswordForm, changeUserNameForm, commentForm, createPostForm, loginForm,
+    passwordResetForm, signUpForm
 )
 
 
