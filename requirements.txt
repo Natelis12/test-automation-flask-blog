@@ -3,3 +3,5 @@ passlib==1.7.4
 WTForms==3.0.1
 flaskwebgui==1.0.3
 pytest
+isort
+flake8

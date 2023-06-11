@@ -1,4 +1,4 @@
-from wtforms import validators, Form, StringField, PasswordField, TextAreaField
+from wtforms import Form, PasswordField, StringField, TextAreaField, validators
 
 
 class commentForm(Form):

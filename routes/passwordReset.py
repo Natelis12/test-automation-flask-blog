@@ -1,17 +1,8 @@
+from helpers import Blueprint, EmailMessage, flash
+from helpers import message as messageDebugging
 from helpers import (
-    ssl,
-    flash,
-    smtplib,
-    randint,
-    sqlite3,
-    request,
-    redirect,
-    Blueprint,
-    EmailMessage,
-    sha256_crypt,
-    render_template,
-    passwordResetForm,
-    message as messageDebugging,
+    passwordResetForm, randint, redirect, render_template, request, sha256_crypt, smtplib, sqlite3,
+    ssl
 )
 
 passwordResetBlueprint = Blueprint("passwordReset", __name__)
@@ -35,7 +26,8 @@ def passwordReset(codeSent):
                 match code == passwordResetCode:
                     case True:
                         cursor.execute(
-                            f'select password from users where lower(userName) = "{userName.lower()}"'
+                            f'select password from users where lower(userName) = '
+                            f'"{userName.lower()}"'
                         )
                         oldPassword = cursor.fetchone()[0]
                         match password == passwordConfirm:
@@ -49,7 +41,8 @@ def passwordReset(codeSent):
                                     case False:
                                         password = sha256_crypt.hash(password)
                                         cursor.execute(
-                                            f'update users set password = "{password}" where lower(userName) = "{userName.lower()}"'
+                                            f'update users set password = "{password}" where '
+                                            f'lower(userName) = "{userName.lower()}"'
                                         )
                                         connection.commit()
                                         messageDebugging(
@@ -96,14 +89,16 @@ def passwordReset(codeSent):
                         passwordResetCode = str(randint(1000, 9999))
                         message = EmailMessage()
                         message.set_content(
-                            f"Hi {userName}👋,\nForgot your password😶‍🌫️? No problem👌.\nHere is your password reset code🔢:\n{passwordResetCode}"
+                            f"Hi {userName}👋,\nForgot your password😶‍🌫️?"
+                            f"No problem👌.\nHere is your password reset code🔢:\n{passwordResetCode}"
                         )
                         message.add_alternative(
                             f"""\
                         <html>
                             <body>
                                 <h2>Hi {userName}👋,</h2>
-                                <h3>Forgot your password😶‍🌫️? No problem👌.<br>Here is your password reset code🔢:</h3>
+                                <h3>Forgot your password😶‍🌫️?
+                                No problem👌.<br>Here is your password reset code🔢:</h3>
                                 <h1>{passwordResetCode}</h1>
                                 </body>
                         </html>

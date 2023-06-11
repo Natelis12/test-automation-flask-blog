@@ -1,16 +1,6 @@
 from helpers import (
-    session,
-    sqlite3,
-    request,
-    flash,
-    message,
-    redirect,
-    addPoints,
-    currentDate,
-    currentTime,
-    render_template,
-    Blueprint,
-    createPostForm,
+    Blueprint, addPoints, createPostForm, currentDate, currentTime, flash, message, redirect,
+    render_template, request, session, sqlite3
 )
 
 createPostBlueprint = Blueprint("createPost", __name__)
@@ -37,7 +27,8 @@ def createPost():
                         cursor = connection.cursor()
                         cursor.execute(
                             f"""
-                            insert into posts(title,tags,content,author,views,date,time,lastEditDate,lastEditTime) 
+                            insert into posts(title,tags,content,author,views,date,
+                            time,lastEditDate,lastEditTime)
                             values("{postTitle}","{postTags}","{postContent}",
                             "{session["userName"]}",0,
                             "{currentDate()}",

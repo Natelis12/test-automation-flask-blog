@@ -1,8 +1,4 @@
-from helpers import (
-    sqlite3,
-    render_template,
-    Blueprint,
-)
+from helpers import Blueprint, render_template, sqlite3
 
 indexBlueprint = Blueprint("index", __name__)
 

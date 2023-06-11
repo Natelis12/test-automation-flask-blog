@@ -1,10 +1,4 @@
-from helpers import (
-    session,
-    sqlite3,
-    message,
-    redirect,
-    Blueprint,
-)
+from helpers import Blueprint, message, redirect, session, sqlite3
 
 deleteUserBlueprint = Blueprint("deleteUser", __name__)
 
@@ -34,7 +28,7 @@ def deleteUser(userName, direct):
                             cursor.execute(
                                 f'delete from users where lower(userName) = "{userName}"'
                             )
-                            cursor.execute(f"update sqlite_sequence set seq = seq-1")
+                            cursor.execute("update sqlite_sequence set seq = seq-1")
                             connection.commit()
                             message("2", f'USER: "{userName}" DELETED')
                             match perpetrator[0] == "admin":

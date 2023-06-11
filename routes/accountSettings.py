@@ -1,9 +1,4 @@
-from helpers import (
-    session,
-    redirect,
-    render_template,
-    Blueprint,
-)
+from helpers import Blueprint, redirect, render_template, session
 
 accountSettingsBlueprint = Blueprint("accountSettings", __name__)
 

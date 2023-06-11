@@ -1,37 +1,30 @@
 import socket
 
-from helpers import (
-    secrets,
-    message,
-    render_template,
-    getProfilePicture,
-    Flask,
-)
-
-from routes.post import postBlueprint
-from routes.user import userBlueprint
+from dbChecker import commentsTable, dbFolder, postsTable, usersTable
+from helpers import Flask, getProfilePicture, message, render_template, secrets
+from routes.accountSettings import accountSettingsBlueprint
+from routes.adminPanel import adminPanelBlueprint
+from routes.adminPanelComments import adminPanelCommentsBlueprint
+from routes.adminPanelPosts import adminPanelPostsBlueprint
+from routes.adminPanelUsers import adminPanelUsersBlueprint
+from routes.changePassword import changePasswordBlueprint
+from routes.changeUserName import changeUserNameBlueprint
+from routes.createPost import createPostBlueprint
+from routes.dashboard import dashboardBlueprint
+from routes.deleteComment import deleteCommentBlueprint
+from routes.deletePost import deletePostBlueprint
+from routes.deleteUser import deleteUserBlueprint
+from routes.editPost import editPostBlueprint
 from routes.index import indexBlueprint
 from routes.login import loginBlueprint
-from routes.signup import signUpBlueprint
 from routes.logout import logoutBlueprint
+from routes.passwordReset import passwordResetBlueprint
+from routes.post import postBlueprint
 from routes.search import searchBlueprint
 from routes.searchBar import searchBarBlueprint
-from routes.editPost import editPostBlueprint
-from routes.dashboard import dashboardBlueprint
-from routes.adminPanel import adminPanelBlueprint
-from routes.deleteUser import deleteUserBlueprint
-from routes.deletePost import deletePostBlueprint
-from routes.createPost import createPostBlueprint
 from routes.setUserRole import setUserRoleBlueprint
-from routes.passwordReset import passwordResetBlueprint
-from routes.deleteComment import deleteCommentBlueprint
-from routes.changeUserName import changeUserNameBlueprint
-from routes.changePassword import changePasswordBlueprint
-from routes.adminPanelUsers import adminPanelUsersBlueprint
-from routes.adminPanelPosts import adminPanelPostsBlueprint
-from routes.accountSettings import accountSettingsBlueprint
-from routes.adminPanelComments import adminPanelCommentsBlueprint
-from dbChecker import dbFolder, usersTable, postsTable, commentsTable
+from routes.signup import signUpBlueprint
+from routes.user import userBlueprint
 
 dbFolder()
 usersTable()

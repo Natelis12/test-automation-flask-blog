@@ -1,15 +1,6 @@
 from helpers import (
-    session,
-    sqlite3,
-    request,
-    flash,
-    message,
-    redirect,
-    currentDate,
-    currentTime,
-    render_template,
-    Blueprint,
-    createPostForm,
+    Blueprint, createPostForm, currentDate, currentTime, flash, message, redirect, render_template,
+    request, session, sqlite3
 )
 
 editPostBlueprint = Blueprint("editPost", __name__)
@@ -21,7 +12,7 @@ def editPost(postID):
         case True:
             connection = sqlite3.connect("db/posts.db")
             cursor = connection.cursor()
-            cursor.execute(f"select id from posts")
+            cursor.execute("select id from posts")
             posts = str(cursor.fetchall())
             match str(postID) in posts:
                 case True:
@@ -50,25 +41,31 @@ def editPost(postID):
                                         flash("post content not be empty", "error")
                                         message(
                                             "1",
-                                            f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
+                                            f'POST CONTENT NOT BE EMPTY USER: '
+                                            f'"{session["userName"]}"',
                                         )
                                     case False:
                                         connection = sqlite3.connect("db/posts.db")
                                         cursor = connection.cursor()
                                         cursor.execute(
-                                            f'update posts set title = "{postTitle}" where id = {post[0]}'
+                                            f'update posts set title = '
+                                            f'"{postTitle}" where id = {post[0]}'
                                         )
                                         cursor.execute(
-                                            f'update posts set tags = "{postTags}" where id = {post[0]}'
+                                            f'update posts set tags = '
+                                            f'"{postTags}" where id = {post[0]}'
                                         )
                                         cursor.execute(
-                                            f'update posts set content = "{postContent}" where id = {post[0]}'
+                                            f'update posts set content = '
+                                            f'"{postContent}" where id = {post[0]}'
                                         )
                                         cursor.execute(
-                                            f'update posts set lastEditDate = "{currentDate()}" where id = {post[0]}'
+                                            f'update posts set lastEditDate = '
+                                            f'"{currentDate()}" where id = {post[0]}'
                                         )
                                         cursor.execute(
-                                            f'update posts set lastEditTime = "{currentTime()}" where id = {post[0]}'
+                                            f'update posts set lastEditTime = '
+                                            f'"{currentTime()}" where id = {post[0]}'
                                         )
                                         connection.commit()
                                         message("2", f'POST: "{postTitle}" EDITED')

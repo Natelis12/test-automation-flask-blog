@@ -1,16 +1,6 @@
 from helpers import (
-    session,
-    sqlite3,
-    request,
-    flash,
-    message,
-    redirect,
-    addPoints,
-    currentDate,
-    currentTime,
-    render_template,
-    Blueprint,
-    commentForm,
+    Blueprint, addPoints, commentForm, currentDate, currentTime, flash, message, redirect,
+    render_template, request, session, sqlite3
 )
 
 postBlueprint = Blueprint("post", __name__)
@@ -21,7 +11,7 @@ def post(postID):
     form = commentForm(request.form)
     connection = sqlite3.connect("db/posts.db")
     cursor = connection.cursor()
-    cursor.execute(f"select id from posts")
+    cursor.execute("select id from posts")
     posts = str(cursor.fetchall())
     match str(postID) in posts:
         case True:

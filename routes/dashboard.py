@@ -1,12 +1,4 @@
-from helpers import (
-    session,
-    sqlite3,
-    flash,
-    message,
-    redirect,
-    render_template,
-    Blueprint,
-)
+from helpers import Blueprint, flash, message, redirect, render_template, session, sqlite3
 
 dashboardBlueprint = Blueprint("dashboard", __name__)
 

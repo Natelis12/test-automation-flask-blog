@@ -1,15 +1,6 @@
 from helpers import (
-    session,
-    request,
-    sqlite3,
-    flash,
-    message,
-    redirect,
-    addPoints,
-    render_template,
-    Blueprint,
-    loginForm,
-    sha256_crypt,
+    Blueprint, addPoints, flash, loginForm, message, redirect, render_template, request, session,
+    sha256_crypt, sqlite3
 )
 
 loginBlueprint = Blueprint("login", __name__)

@@ -1,10 +1,4 @@
-from helpers import (
-    session,
-    sqlite3,
-    message,
-    redirect,
-    Blueprint,
-)
+from helpers import Blueprint, message, redirect, session, sqlite3
 
 deletePostBlueprint = Blueprint("deletePost", __name__)
 
@@ -21,16 +15,17 @@ def deletePost(postID, direct):
             match author[0] == session["userName"]:
                 case True:
                     cursor.execute(f"delete from posts where id = {postID}")
-                    cursor.execute(f"update sqlite_sequence set seq = seq-1")
+                    cursor.execute("update sqlite_sequence set seq = seq-1")
                     connection.commit()
                     message("2", f'POST: "{postID}" DELETED')
-                    return redirect(f"/")
+                    return redirect("/")
                 case False:
                     message(
                         "1",
-                        f'POST: "{postID}" NOT DELETED "{postID}" DOES NOT BELONG TO USER: {session["userName"]}',
+                        f'POST: "{postID}" NOT DELETED "{postID}" DOES NOT BELONG '
+                        f'TO USER: {session["userName"]}',
                     )
-                    return redirect(f"/")
+                    return redirect("/")
             return redirect(f"/{direct}")
         case False:
             message("1", f'USER NEEDS TO LOGIN FOR DELETE POST: "{postID}"')

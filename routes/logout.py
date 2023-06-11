@@ -1,5 +1,4 @@
-from helpers import session, redirect, message, Blueprint
-
+from helpers import Blueprint, message, redirect, session
 
 logoutBlueprint = Blueprint("logout", __name__)
 
@@ -12,5 +11,5 @@ def logout():
             session.clear()
             return redirect("/")
         case False:
-            message("1", f"USER NOT LOGGED IN")
+            message("1", "USER NOT LOGGED IN")
             return redirect("/")

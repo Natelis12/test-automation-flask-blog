@@ -1,10 +1,4 @@
-from helpers import (
-    session,
-    sqlite3,
-    message,
-    redirect,
-    Blueprint,
-)
+from helpers import Blueprint, message, redirect, session, sqlite3
 
 deleteCommentBlueprint = Blueprint("deleteComment", __name__)
 
@@ -21,14 +15,15 @@ def deleteComment(commentID, direct):
             match user[0] == session["userName"]:
                 case True:
                     cursor.execute(f"delete from comments where id = {commentID}")
-                    cursor.execute(f"update sqlite_sequence set seq = seq-1")
+                    cursor.execute("update sqlite_sequence set seq = seq-1")
                     connection.commit()
                     message("2", f'COMMENT: "{commentID}" DELETED')
                     return redirect(f"/{direct}")
                 case False:
                     message(
                         "1",
-                        f'COMMENT: "{commentID}" NOT DELETED "{commentID}" DOES NOT BELONG TO {session["userName"]}',
+                        f'COMMENT: "{commentID}" NOT DELETED "{commentID}" '
+                        f'DOES NOT BELONG TO {session["userName"]}',
                     )
                     return redirect(f"/{direct}")
         case False:

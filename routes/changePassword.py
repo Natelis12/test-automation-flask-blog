@@ -1,14 +1,6 @@
 from helpers import (
-    session,
-    sqlite3,
-    request,
-    flash,
-    message,
-    redirect,
-    render_template,
-    Blueprint,
-    sha256_crypt,
-    changePasswordForm,
+    Blueprint, changePasswordForm, flash, message, redirect, render_template, request, session,
+    sha256_crypt, sqlite3
 )
 
 changePasswordBlueprint = Blueprint("changePassword", __name__)
@@ -38,7 +30,8 @@ def changePassword():
                         connection = sqlite3.connect("db/users.db")
                         cursor = connection.cursor()
                         cursor.execute(
-                            f'update users set password = "{newPassword}" where userName = "{session["userName"]}"'
+                            f'update users set password = "{newPassword}" '
+                            f'where userName = "{session["userName"]}"'
                         )
                         connection.commit()
                         message(
