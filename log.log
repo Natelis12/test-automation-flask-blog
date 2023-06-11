@@ -1,0 +1,7 @@
+[11.06.23|13:07:28] Folder: "/db" FOUND
+[11.06.23|13:07:28] DATABASE: "users.db" FOUND
+[11.06.23|13:07:28] TABLE: "Users" FOUND
+[11.06.23|13:07:28] DATABASE: "posts.db" FOUND
+[11.06.23|13:07:28] TABLE: "Posts" FOUND
+[11.06.23|13:07:28] DATABASE: "comments.db" FOUND
+[11.06.23|13:07:28] TABLE: "Comments" FOUND
