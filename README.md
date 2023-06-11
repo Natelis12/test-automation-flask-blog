@@ -2,6 +2,9 @@
 
 Simple blog app built with Flask.
 
+## Author 
+Nataliia Khoruzhenko
+
 ## Features 💫
 
 | Feature               | Status |
