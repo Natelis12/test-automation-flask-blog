@@ -59,6 +59,11 @@ or
 `python desktop.py`
 for run flaskBlog as a desktop app 💯
 
+
+## Testing and linting
+`pytest .` for running automated tests
+`flake8 . && isort --check --diff .` for exposing linting issues
+
 ### Contributors 💕
 
 <a href="https://github.com/dogukanurker/flaskblog/graphs/contributors">
