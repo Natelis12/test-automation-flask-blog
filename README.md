@@ -63,6 +63,7 @@ for run flaskBlog as a desktop app 💯
 ## Testing and linting
 `pytest .` for running automated tests
 `flake8 . && isort --check --diff .` for exposing linting issues
+`bandit -r .` to run security check
 
 ### Contributors 💕
 

@@ -1,0 +1,3 @@
+[bandit]
+exclude: ./venv,./.venv,./tests
+skips: B608

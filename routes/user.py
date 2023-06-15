@@ -13,12 +13,12 @@ def user(userName):
         case True:
             message("2", f'USER: "{userName}" FOUND')
             cursor.execute(
-                'select * from users where lower(userName) = "{userName}"')
+                f'select * from users where lower(userName) = "{userName}"')
             user = cursor.fetchone()
             connection = sqlite3.connect("db/posts.db")
             cursor = connection.cursor()
             cursor.execute(
-                'select views from posts where author = "{user[1]}"')
+                f'select views from posts where author = "{user[1]}"')
             viewsData = cursor.fetchall()
             views = 0
             for view in viewsData:
@@ -28,7 +28,7 @@ def user(userName):
             connection = sqlite3.connect("db/comments.db")
             cursor = connection.cursor()
             cursor.execute(
-                'select * from comments where lower(user) = "{userName.lower()}"'
+                f'select * from comments where lower(user) = "{userName.lower()}"'
             )
             comments = cursor.fetchall()
             if posts:

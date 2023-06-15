@@ -5,3 +5,4 @@ flaskwebgui==1.0.3
 pytest
 isort
 flake8
+bandit
