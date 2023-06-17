@@ -8,3 +8,4 @@ flake8
 bandit
 coverage
 pytest-cov
+pytest_mock
