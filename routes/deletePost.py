@@ -1,3 +1,4 @@
+from dbChecker import POSTS_DB
 from helpers import Blueprint, message, redirect, session, sqlite3
 
 deletePostBlueprint = Blueprint("deletePost", __name__)
@@ -8,7 +9,7 @@ def deletePost(postID, direct):
     direct = direct.replace("&", "/")
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/posts.db")
+            connection = sqlite3.connect(POSTS_DB)
             cursor = connection.cursor()
             cursor.execute(f"select author from posts where id = {postID}")
             author = cursor.fetchone()

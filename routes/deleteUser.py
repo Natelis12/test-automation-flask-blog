@@ -1,14 +1,15 @@
+from dbChecker import USERS_DB
 from helpers import Blueprint, message, redirect, session, sqlite3
 
 deleteUserBlueprint = Blueprint("deleteUser", __name__)
 
 
-@deleteUserBlueprint.route("/deleteuser/<userName>/redirect=<direct>")
+@deleteUserBlueprint.route("/admin/deleteuser/<userName>/redirect=<direct>")
 def deleteUser(userName, direct):
     direct = direct.replace("&", "/")
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/users.db")
+            connection = sqlite3.connect(USERS_DB)
             cursor = connection.cursor()
             cursor.execute(
                 f'select * from users where lower(userName) = "{userName.lower()}"'

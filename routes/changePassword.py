@@ -1,3 +1,4 @@
+from dbChecker import USERS_DB
 from helpers import (
     Blueprint, changePasswordForm, flash, message, redirect, render_template, request, session,
     sha256_crypt, sqlite3
@@ -15,7 +16,7 @@ def changePassword():
                 oldPassword = request.form["oldPassword"]
                 password = request.form["password"]
                 passwordConfirm = request.form["passwordConfirm"]
-                connection = sqlite3.connect("db/users.db")
+                connection = sqlite3.connect(USERS_DB)
                 cursor = connection.cursor()
                 cursor.execute(
                     f'select password from users where userName = "{session["userName"]}"'
@@ -27,7 +28,7 @@ def changePassword():
                         flash("passwords must match", "error")
                     elif oldPassword != password and password == passwordConfirm:
                         newPassword = sha256_crypt.hash(password)
-                        connection = sqlite3.connect("db/users.db")
+                        connection = sqlite3.connect(USERS_DB)
                         cursor = connection.cursor()
                         cursor.execute(
                             f'update users set password = "{newPassword}" '

@@ -1,3 +1,4 @@
+from dbChecker import POSTS_DB, USERS_DB
 from helpers import Blueprint, redirect, render_template, session, sqlite3
 
 adminPanelPostsBlueprint = Blueprint("adminPanelPosts", __name__)
@@ -8,7 +9,7 @@ adminPanelPostsBlueprint = Blueprint("adminPanelPosts", __name__)
 def adminPanelPosts():
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/users.db")
+            connection = sqlite3.connect(USERS_DB)
             cursor = connection.cursor()
             cursor.execute(
                 f'select role from users where userName = "{session["userName"]}"'
@@ -16,7 +17,7 @@ def adminPanelPosts():
             role = cursor.fetchone()[0]
             match role == "admin":
                 case True:
-                    connection = sqlite3.connect("db/posts.db")
+                    connection = sqlite3.connect(POSTS_DB)
                     cursor = connection.cursor()
                     cursor.execute("select * from posts")
                     posts = cursor.fetchall()

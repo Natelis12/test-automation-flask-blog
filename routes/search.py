@@ -1,3 +1,4 @@
+from dbChecker import POSTS_DB, USERS_DB
 from helpers import Blueprint, render_template, sqlite3
 
 searchBlueprint = Blueprint("search", __name__)
@@ -7,7 +8,7 @@ searchBlueprint = Blueprint("search", __name__)
 def search(query):
     queryNoWhiteSpace = query.replace("+", "")
     query = query.replace("+", " ")
-    connection = sqlite3.connect("db/users.db")
+    connection = sqlite3.connect(USERS_DB)
     cursor = connection.cursor()
     queryUsers = cursor.execute(
         f"select * from users where userName like '%{query}%'"
@@ -15,7 +16,7 @@ def search(query):
     queryUsers = cursor.execute(
         f"select * from users where userName like '%{queryNoWhiteSpace}%'"
     ).fetchall()
-    connection = sqlite3.connect("db/posts.db")
+    connection = sqlite3.connect(POSTS_DB)
     cursor = connection.cursor()
     queryTags = cursor.execute(
         f"select * from posts where tags like '%{query}%'"

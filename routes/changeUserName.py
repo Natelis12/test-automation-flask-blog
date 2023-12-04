@@ -1,3 +1,4 @@
+from dbChecker import COMMENTS_DB, POSTS_DB, USERS_DB
 from helpers import (
     Blueprint, changeUserNameForm, flash, message, redirect, render_template, request, session,
     sqlite3
@@ -14,7 +15,7 @@ def changeUserName():
             if request.method == "POST":
                 newUserName = request.form["newUserName"]
                 newUserName = newUserName.replace(" ", "")
-                connection = sqlite3.connect("db/users.db")
+                connection = sqlite3.connect(USERS_DB)
                 cursor = connection.cursor()
                 cursor.execute(
                     f'select userName from users where userName = "{newUserName}"'
@@ -33,14 +34,14 @@ def changeUserName():
                                             f'where userName = "{session["userName"]}" '
                                         )
                                         connection.commit()
-                                        connection = sqlite3.connect("db/posts.db")
+                                        connection = sqlite3.connect(POSTS_DB)
                                         cursor = connection.cursor()
                                         cursor.execute(
                                             f'update posts set Author = "{newUserName}" '
                                             f'where author = "{session["userName"]}" '
                                         )
                                         connection.commit()
-                                        connection = sqlite3.connect("db/comments.db")
+                                        connection = sqlite3.connect(COMMENTS_DB)
                                         cursor = connection.cursor()
                                         cursor.execute(
                                             f'update comments set user = "{newUserName}" '

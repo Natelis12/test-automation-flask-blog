@@ -1,3 +1,4 @@
+from dbChecker import USERS_DB
 from helpers import Blueprint, redirect, render_template, session, sqlite3
 
 adminPanelBlueprint = Blueprint("adminPanel", __name__)
@@ -7,7 +8,7 @@ adminPanelBlueprint = Blueprint("adminPanel", __name__)
 def adminPanel():
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/users.db")
+            connection = sqlite3.connect(USERS_DB)
             cursor = connection.cursor()
             cursor.execute(
                 f'select role from users where userName = "{session["userName"]}"'

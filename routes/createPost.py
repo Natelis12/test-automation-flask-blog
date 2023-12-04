@@ -1,3 +1,4 @@
+from dbChecker import POSTS_DB
 from helpers import (
     Blueprint, addPoints, createPostForm, currentDate, currentTime, flash, message, redirect,
     render_template, request, session, sqlite3
@@ -23,7 +24,7 @@ def createPost():
                             f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
                         )
                     case False:
-                        connection = sqlite3.connect("db/posts.db")
+                        connection = sqlite3.connect(POSTS_DB)
                         cursor = connection.cursor()
                         cursor.execute(
                             f"""

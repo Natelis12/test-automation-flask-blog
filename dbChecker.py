@@ -1,4 +1,10 @@
+import os
+
 from helpers import exists, message, mkdir, sqlite3
+
+USERS_DB = os.getenv('USERS_DB', 'db/users.db')
+COMMENTS_DB = os.getenv('COMMENTS_DB', 'db/comments.db')
+POSTS_DB = os.getenv('POSTS_DB', 'db/posts.db')
 
 
 def dbFolder():
@@ -12,14 +18,14 @@ def dbFolder():
 
 
 def usersTable():
-    match exists("db/users.db"):
+    match exists(USERS_DB):
         case True:
             message("6", 'DATABASE: "users.db" FOUND')
         case False:
             message("1", 'DATABASE: "users.db" NOT FOUND')
-            open("db/users.db", "x")
+            open(USERS_DB, "x")
             message("2", 'DATABASE: "users.db" CREATED')
-    connection = sqlite3.connect("db/users.db")
+    connection = sqlite3.connect(USERS_DB)
     cursor = connection.cursor()
     try:
         cursor.execute("""SELECT * FROM users; """).fetchall()
@@ -46,14 +52,14 @@ def usersTable():
 
 
 def postsTable():
-    match exists("db/posts.db"):
+    match exists(POSTS_DB):
         case True:
             message("6", 'DATABASE: "posts.db" FOUND')
         case False:
             message("1", 'DATABASE: "posts.db" NOT FOUND')
-            open("db/posts.db", "x")
+            open(POSTS_DB, "x")
             message("2", 'DATABASE: "posts.db" CREATED')
-    connection = sqlite3.connect("db/posts.db")
+    connection = sqlite3.connect(POSTS_DB)
     cursor = connection.cursor()
     try:
         cursor.execute("""SELECT * FROM posts; """).fetchall()
@@ -82,14 +88,14 @@ def postsTable():
 
 
 def commentsTable():
-    match exists("db/comments.db"):
+    match exists(COMMENTS_DB):
         case True:
             message("6", 'DATABASE: "comments.db" FOUND')
         case False:
             message("1", 'DATABASE: "comments.db" NOT FOUND')
-            open("db/comments.db", "x")
+            open(COMMENTS_DB, "x")
             message("2", 'DATABASE: "comments.db" CREATED')
-    connection = sqlite3.connect("db/comments.db")
+    connection = sqlite3.connect(COMMENTS_DB)
     cursor = connection.cursor()
     try:
         cursor.execute("""SELECT * FROM comments; """).fetchall()

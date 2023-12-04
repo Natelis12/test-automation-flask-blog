@@ -1,3 +1,4 @@
+from dbChecker import USERS_DB
 from helpers import (
     Blueprint, addPoints, flash, loginForm, message, redirect, render_template, request, session,
     sha256_crypt, sqlite3
@@ -19,7 +20,7 @@ def login(direct):
                 userName = request.form["userName"]
                 password = request.form["password"]
                 userName = userName.replace(" ", "")
-                connection = sqlite3.connect("db/users.db")
+                connection = sqlite3.connect(USERS_DB)
                 cursor = connection.cursor()
                 cursor.execute(
                     f'select * from users where lower(userName) = "{userName.lower()}"'

@@ -1,3 +1,4 @@
+from dbChecker import COMMENTS_DB
 from helpers import Blueprint, message, redirect, session, sqlite3
 
 deleteCommentBlueprint = Blueprint("deleteComment", __name__)
@@ -8,7 +9,7 @@ def deleteComment(commentID, direct):
     direct = direct.replace("&", "/")
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/comments.db")
+            connection = sqlite3.connect(COMMENTS_DB)
             cursor = connection.cursor()
             cursor.execute(f"select user from comments where id = {commentID}")
             user = cursor.fetchone()
