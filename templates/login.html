@@ -4,8 +4,18 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/submit.css') }}"
 />
+<style>
+  .container {
+    margin-top: 20px; /* Adjust the margin-top value as needed */
+  }
+
+  h2 {
+    margin-bottom: 10px; /* Add margin below the h2 tag */
+  }
+</style>
 {% endblock head %} {%block body%}
 <div class="container">
+  <h2>Login</h2> <!-- Login -->
   <form method="post" class="form">
     {{form.userName(class_="input",autocomplete="off")}}{{form.password(autocomplete="off",class_="input")}}
     <button type="submit" class="btn btnPrimary">Login</button>
