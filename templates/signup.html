@@ -4,8 +4,18 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/submit.css') }}"
 />
+<style>
+  .container {
+    margin-top: 20px; /* Adjust the margin-top value as needed */
+  }
+
+  h2 {
+    margin-bottom: 100px; /* Add margin below the h2 tag */
+  }
+</style>
 {% endblock head %} {%block body%}
-<div class="container">
+<div class="container signup-container">
+  <h2>Sign Up</h2>
   <form method="post" class="form">
     {{form.userName(class_="input" , autocomplete="off")}}
     {{form.email(class_="input",autocomplete="off")}}

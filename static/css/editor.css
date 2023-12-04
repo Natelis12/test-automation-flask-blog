@@ -1,6 +1,6 @@
 :root {
     /* Overrides the border radius setting in the theme. */
-    --ck-border-radius: 1rem;
+     --ck-border-radius: 1rem;
 
     /* Overrides the default font size in the theme. */
     --ck-font-size-base: 1rem;
@@ -8,7 +8,7 @@
     /* Helper variables to avoid duplication in the colors. */
     --ck-custom-background: hsl(270, 1%, 29%);
     --ck-custom-foreground: hsl(255, 3%, 18%);
-    --ck-custom-border: hsl(300, 1%, 22%);
+    /* --ck-custom-border: hsl(300, 1%, 22%); */
     --ck-custom-white: var(--light);
 
     /* -- Overrides generic colors. ------------------------------------------------------------- */
@@ -105,7 +105,7 @@
 }
 
 .editor {
-    margin: 2rem;
+    margin: 1rem;
 }
 
 .ck-editor__editable * {
@@ -113,5 +113,5 @@
 }
 
 .ck-editor__editable {
-    height: 25rem;
+    height: 10rem;
 }
