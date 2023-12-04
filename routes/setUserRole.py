@@ -1,3 +1,4 @@
+from dbChecker import USERS_DB
 from helpers import Blueprint, message, redirect, session, sqlite3
 
 setUserRoleBlueprint = Blueprint("setUserRole", __name__)
@@ -7,7 +8,7 @@ setUserRoleBlueprint = Blueprint("setUserRole", __name__)
 def setUserRole(userName, newRole):
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/users.db")
+            connection = sqlite3.connect(USERS_DB)
             cursor = connection.cursor()
             cursor.execute(
                 f'select role from users where userName = "{session["userName"]}"'

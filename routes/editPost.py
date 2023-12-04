@@ -1,3 +1,4 @@
+from dbChecker import POSTS_DB, USERS_DB
 from helpers import (
     Blueprint, createPostForm, currentDate, currentTime, flash, message, redirect, render_template,
     request, session, sqlite3
@@ -10,18 +11,18 @@ editPostBlueprint = Blueprint("editPost", __name__)
 def editPost(postID):
     match "userName" in session:
         case True:
-            connection = sqlite3.connect("db/posts.db")
+            connection = sqlite3.connect(POSTS_DB)
             cursor = connection.cursor()
             cursor.execute("select id from posts")
             posts = str(cursor.fetchall())
             match str(postID) in posts:
                 case True:
-                    connection = sqlite3.connect("db/posts.db")
+                    connection = sqlite3.connect(POSTS_DB)
                     cursor = connection.cursor()
                     cursor.execute(f"select * from posts where id = {postID}")
                     post = cursor.fetchone()
                     message("2", f'POST: "{postID}" FOUND')
-                    connection = sqlite3.connect("db/users.db")
+                    connection = sqlite3.connect(USERS_DB)
                     cursor = connection.cursor()
                     cursor.execute(
                         f'select userName from users where userName="{session["userName"]}"'
@@ -45,7 +46,7 @@ def editPost(postID):
                                             f'"{session["userName"]}"',
                                         )
                                     case False:
-                                        connection = sqlite3.connect("db/posts.db")
+                                        connection = sqlite3.connect(POSTS_DB)
                                         cursor = connection.cursor()
                                         cursor.execute(
                                             f'update posts set title = '

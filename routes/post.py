@@ -1,3 +1,4 @@
+from dbChecker import COMMENTS_DB, POSTS_DB
 from helpers import (
     Blueprint, addPoints, commentForm, currentDate, currentTime, flash, message, redirect,
     render_template, request, session, sqlite3
@@ -9,14 +10,14 @@ postBlueprint = Blueprint("post", __name__)
 @postBlueprint.route("/post/<int:postID>", methods=["GET", "POST"])
 def post(postID):
     form = commentForm(request.form)
-    connection = sqlite3.connect("db/posts.db")
+    connection = sqlite3.connect(POSTS_DB)
     cursor = connection.cursor()
     cursor.execute("select id from posts")
     posts = str(cursor.fetchall())
     match str(postID) in posts:
         case True:
             message("2", f'POST: "{postID}" FOUND')
-            connection = sqlite3.connect("db/posts.db")
+            connection = sqlite3.connect(POSTS_DB)
             cursor = connection.cursor()
             cursor.execute(f'select * from posts where id = "{postID}"')
             post = cursor.fetchone()
@@ -24,7 +25,7 @@ def post(postID):
             connection.commit()
             if request.method == "POST":
                 comment = request.form["comment"]
-                connection = sqlite3.connect("db/comments.db")
+                connection = sqlite3.connect(COMMENTS_DB)
                 cursor = connection.cursor()
                 cursor.execute(
                     f"""
@@ -38,7 +39,7 @@ def post(postID):
                 addPoints(5, session["userName"])
                 flash("You earned 5 points by commenting ", "success")
                 return redirect(f"/post/{postID}")
-            connection = sqlite3.connect("db/comments.db")
+            connection = sqlite3.connect(COMMENTS_DB)
             cursor = connection.cursor()
             cursor.execute(f'select * from comments where post = "{postID}"')
             comments = cursor.fetchall()

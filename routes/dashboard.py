@@ -1,3 +1,4 @@
+from dbChecker import COMMENTS_DB, POSTS_DB
 from helpers import Blueprint, flash, message, redirect, render_template, session, sqlite3
 
 dashboardBlueprint = Blueprint("dashboard", __name__)
@@ -9,13 +10,13 @@ def dashboard(userName):
         case True:
             match session["userName"].lower() == userName.lower():
                 case True:
-                    connection = sqlite3.connect("db/posts.db")
+                    connection = sqlite3.connect(POSTS_DB)
                     cursor = connection.cursor()
                     cursor.execute(
                         f'select * from posts where author = "{session["userName"]}"'
                     )
                     posts = cursor.fetchall()
-                    connection = sqlite3.connect("db/comments.db")
+                    connection = sqlite3.connect(COMMENTS_DB)
                     cursor = connection.cursor()
                     cursor.execute(
                         f'select * from comments where lower(user) = "{userName.lower()}"'

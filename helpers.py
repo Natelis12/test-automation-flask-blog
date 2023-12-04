@@ -19,6 +19,8 @@ from forms import (
     passwordResetForm, signUpForm
 )
 
+USERS_DB = os.getenv('USERS_DB', 'db/users.db')
+
 
 def currentDate():
     return datetime.now().strftime("%d.%m.%y")
@@ -44,7 +46,7 @@ def message(color, message):
 
 
 def addPoints(points, user):
-    connection = sqlite3.connect("db/users.db")
+    connection = sqlite3.connect(USERS_DB)
     cursor = connection.cursor()
     cursor.execute(
         f'update users set points = points+{points} where userName = "{user}"'
@@ -54,7 +56,7 @@ def addPoints(points, user):
 
 
 def getProfilePicture(userName):
-    connection = sqlite3.connect("db/users.db")
+    connection = sqlite3.connect(USERS_DB)
     cursor = connection.cursor()
     cursor.execute(
         f'select profilePicture from users where lower(userName) = "{userName.lower()}"'

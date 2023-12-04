@@ -1,3 +1,4 @@
+from dbChecker import COMMENTS_DB, POSTS_DB, USERS_DB
 from helpers import Blueprint, message, render_template, sqlite3
 
 userBlueprint = Blueprint("user", __name__)
@@ -5,7 +6,7 @@ userBlueprint = Blueprint("user", __name__)
 
 @userBlueprint.route("/user/<userName>")
 def user(userName):
-    connection = sqlite3.connect("db/users.db")
+    connection = sqlite3.connect(USERS_DB)
     cursor = connection.cursor()
     cursor.execute("select userName from users")
     users = cursor.fetchall()
@@ -15,7 +16,7 @@ def user(userName):
             cursor.execute(
                 f'select * from users where lower(userName) = "{userName}"')
             user = cursor.fetchone()
-            connection = sqlite3.connect("db/posts.db")
+            connection = sqlite3.connect(POSTS_DB)
             cursor = connection.cursor()
             cursor.execute(
                 f'select views from posts where author = "{user[1]}"')
@@ -25,7 +26,7 @@ def user(userName):
                 views += int(view[0])
             cursor.execute(f'select * from posts where author = "{user[1]}"')
             posts = cursor.fetchall()
-            connection = sqlite3.connect("db/comments.db")
+            connection = sqlite3.connect(COMMENTS_DB)
             cursor = connection.cursor()
             cursor.execute(
                 f'select * from comments where lower(user) = "{userName.lower()}"'

@@ -1,3 +1,4 @@
+from dbChecker import USERS_DB
 from helpers import (
     Blueprint, currentDate, currentTime, flash, message, redirect, render_template, request,
     secrets, session, sha256_crypt, signUpForm, sqlite3
@@ -20,7 +21,7 @@ def signup():
                 password = request.form["password"]
                 passwordConfirm = request.form["passwordConfirm"]
                 userName = userName.replace(" ", "")
-                connection = sqlite3.connect("db/users.db")
+                connection = sqlite3.connect(USERS_DB)
                 cursor = connection.cursor()
                 cursor.execute("select userName from users")
                 users = str(cursor.fetchall())
@@ -31,7 +32,7 @@ def signup():
                         match userName.isascii():
                             case True:
                                 password = sha256_crypt.hash(password)
-                                connection = sqlite3.connect("db/users.db")
+                                connection = sqlite3.connect(USERS_DB)
                                 cursor = connection.cursor()
                                 cursor.execute(
                                     f"""
@@ -52,7 +53,7 @@ def signup():
                                     "1",
                                     f'USERNAME: "{userName}" DOES NOT FITS ASCII CHARACTERS',
                                 )
-                                flash("username does not fit ascii charecters", "error")
+                                flash("username does not fit ascii characters", "error")
                     elif passwordConfirm != password:
                         message("1", " PASSWORDS MUST MATCH ")
                         flash("password must match", "error")
