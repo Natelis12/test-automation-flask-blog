@@ -1,4 +1,4 @@
-from app import app
+from tests.conftest import app
 
 app.config['TESTING'] = True
 

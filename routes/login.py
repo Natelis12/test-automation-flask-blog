@@ -38,5 +38,5 @@ def login(direct):
                         return redirect(direct)
                     else:
                         message("1", "WRONG PASSWORD")
-                        flash("wrong  password", "error")
+                        flash("wrong password", "error")
             return render_template("login.html", form=form, hideLogin=True)
