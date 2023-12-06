@@ -2,8 +2,11 @@ import os
 
 import pytest
 
+from app import app
 from dbChecker import COMMENTS_DB, POSTS_DB, USERS_DB
-from helpers import exists, message, sqlite3
+from helpers import exists, message, sha256_crypt, sqlite3
+
+app.config['TESTING'] = True
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -43,3 +46,51 @@ def truncate_database(db_path):
     else:
         message("1", f'DATABASE: "{db_path}" NOT FOUND')
         assert False, f'DATABASE: "{db_path}" NOT FOUND'
+
+
+def create_test_user(user_name, email, password, role=None):
+    connection = sqlite3.connect(USERS_DB)
+    cursor = connection.cursor()
+    hashed_password = sha256_crypt.hash(password)
+    cursor.execute(
+        'INSERT INTO users (userName, email, password, role) VALUES (?, ?, ?, ?)',
+        (user_name, email, hashed_password, role)
+    )
+    connection.commit()
+    connection.close()
+
+
+def login_user(client, username, password):
+    form_data = {
+        'userName': username,
+        'password': password
+    }
+    return client.post('/login/redirect=test', data=form_data)
+
+
+def create_test_post(post_id, title, tags, content, author, views, date, time):
+    connection = sqlite3.connect(POSTS_DB)
+    cursor = connection.cursor()
+    cursor.execute(
+        'INSERT INTO posts (id, title, tags, content, author, views, date, time) '
+        'VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        (post_id, title, tags, content, author, views, date, time)
+    )
+    connection.commit()
+    connection.close()
+
+
+def create_test_comment(comment_id, content, user_name, date, time):
+    connection = sqlite3.connect(COMMENTS_DB)
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        INSERT INTO comments (id, post, comment, user, date, time)
+        VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        (comment_id, 1, content, user_name, date, time)
+    )
+
+    connection.commit()
+    connection.close()
