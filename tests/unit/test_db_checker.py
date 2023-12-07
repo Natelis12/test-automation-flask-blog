@@ -22,7 +22,7 @@ def test_users_table_operational_exception(mocker):
     mock_open = mocker.patch('builtins.open')
     mock_sqlite_connect = mocker.patch.object(sqlite3, 'connect')
     mocker.patch.object(sqlite3, 'Cursor')
-    
+
     usersTable()
 
     mock_message.assert_called_with('2', 'TABLE: "Users" CREATED')

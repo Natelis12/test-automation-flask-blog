@@ -41,7 +41,6 @@ Nataliia Khoruzhenko
 - Flask
 - Passlib
 - WTForms
-- Flaskwebgui <sub><sup>(if you run desktop.py)</sup></sub>
 - SQLite as a DB engine
 - Python 3.10 or newer
 
@@ -55,9 +54,6 @@ from the root directory of the project install requirements.txt 🔽
 
 it's ready to run 🎉
 `python app.py`
-or
-`python desktop.py`
-for run flaskBlog as a desktop app 💯
 
 
 ## Testing and linting
