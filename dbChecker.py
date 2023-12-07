@@ -1,4 +1,5 @@
 import os
+from sqlite3 import OperationalError
 
 from helpers import exists, message, mkdir, sqlite3
 
@@ -31,7 +32,7 @@ def usersTable():
         cursor.execute("""SELECT * FROM users; """).fetchall()
         message("6", 'TABLE: "Users" FOUND')
         connection.close()
-    except Exception:
+    except OperationalError:
         message("1", 'TABLE: "Users" NOT FOUND')
         usersTable = """
             CREATE TABLE IF NOT EXISTS Users(
@@ -65,7 +66,7 @@ def postsTable():
         cursor.execute("""SELECT * FROM posts; """).fetchall()
         message("6", 'TABLE: "Posts" FOUND')
         connection.close()
-    except BaseException:
+    except OperationalError:
         message("1", 'TABLE: "Posts" NOT FOUND')
         postsTable = """
             CREATE TABLE "posts" (
@@ -101,7 +102,7 @@ def commentsTable():
         cursor.execute("""SELECT * FROM comments; """).fetchall()
         message("6", 'TABLE: "Comments" FOUND')
         connection.close()
-    except Exception:
+    except OperationalError:
         message("1", 'TABLE: "Comments" NOT FOUND')
         commentsTable = """
             CREATE TABLE IF NOT EXISTS comments(
