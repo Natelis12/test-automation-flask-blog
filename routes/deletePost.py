@@ -27,7 +27,7 @@ def deletePost(postID, direct):
                         f'TO USER: {session["userName"]}',
                     )
                     return redirect("/")
-            return redirect(f"/{direct}")
+            # return redirect(f"/{direct}")
         case False:
             message("1", f'USER NEEDS TO LOGIN FOR DELETE POST: "{postID}"')
             return redirect(f"/login/redirect=&post&{postID}")

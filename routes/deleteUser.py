@@ -15,14 +15,14 @@ def deleteUser(userName, direct):
                 f'select * from users where lower(userName) = "{userName.lower()}"'
             )
             user = cursor.fetchone()
+            if not user:
+                message("1", f'USER: "{userName}" NOT FOUND')
+                return redirect(f"/{direct}")
             cursor.execute(
                 f'select role from users where userName = "{session["userName"]}"'
             )
             perpetrator = cursor.fetchone()
             match user:
-                case None:
-                    message("1", f'USER: "{userName}" NOT FOUND')
-                    return redirect(f"/{direct}")
                 case _:
                     match user[1] == session["userName"] or perpetrator[0] == "admin":
                         case True:
