@@ -2,9 +2,6 @@
 
 Simple blog app built with Flask.
 
-## Author 
-Nataliia Khoruzhenko
-
 ## Features 💫
 
 | Feature               | Status |
@@ -60,9 +57,3 @@ it's ready to run 🎉
 `pytest .` for running automated tests
 `flake8 . && isort --check --diff .` for exposing linting issues
 `bandit -r .` to run security check
-
-### Contributors 💕
-
-<a href="https://github.com/dogukanurker/flaskblog/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=dogukanurker/flaskblog" />
-</a>
